@@ -49,7 +49,7 @@ Lets create a widget that shows informatain about failing builds. It'll be close
 * Filter that information, e.g. based on status.
 * Post that information to one of more widgets.
 
-
+<pre><code>
     SCHEDULER.every '15m', :first_in => 0 do |job|
         builds=config[:builds].map{|repo|
             status=JSON(get("https://api.travis-ci.org/repositories/#{config[:user]}//#{repo}/builds.json"))[0]['result']?'ok':'failing'
@@ -62,6 +62,7 @@ Lets create a widget that shows informatain about failing builds. It'll be close
             :status => (failing_builds.length>0?'warning':'ok')
         })
     end
+</code></pre>
 
 To create the widget I've copied the widgets/list to widgets/travis_builds and added this to the code to change the colour of the widget based on status:
 
