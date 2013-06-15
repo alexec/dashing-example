@@ -10,17 +10,17 @@ I thought I'd put a few hints and tips after what I've learnt.
 
 Why do you want a team dashboard? A dashboard can provide an overview of the team's status, and highlight actions that need to be taken. The ones we've got include:
 
- * Actionable tiles:
-    * Build status. Which builds (of the 41 builds) that are broken, and who the CI thinks broken them. This goes red if builds are broken and indicates who needs to fix the build.
-    * Failing tests. Again, which tests are failing and who the CI thinks broke them. Since the test's package can indicate which feature needs fixing, this also indicates who might want to take a look.
-    * Recorded time. Who has not recorded their time in the timesheet system.</span></li>
-    * New tickets. Untriaged tickets in the bug tracking system, that need to be triaged.
-    * Overdue code reviews.
- * Information tiles:
-    * Recent commits. This shows what we're working on.
-    * Beer clock: On Fridays, how many hours to free beer.
-    * Assigned tickets. Tickets we're working on.
-    * Test coverage.
+Actionable tiles:
+* Build status. Which builds (of the 41 builds) that are broken, and who the CI thinks broken them. This goes red if builds are broken and indicates who needs to fix the build.
+* Failing tests. Again, which tests are failing and who the CI thinks broke them. Since the test's package can indicate which feature needs fixing, this also indicates who might want to take a look.
+* Recorded time. Who has not recorded their time in the timesheet system.</span></li>
+* New tickets. Untriaged tickets in the bug tracking system, that need to be triaged.
+* Overdue code reviews.
+Information tiles:
+* Recent commits. This shows what we're working on.
+* Beer clock: On Fridays, how many hours to free beer.
+* Assigned tickets. Tickets we're working on.
+* Test coverage.
 
 What do you notice here? More tiles are actionable rather than informative, and therefore more useful. The current weather or the company stock prices do not feature. It's not an executive dashboard, it is a team dashboard.
 
@@ -46,7 +46,7 @@ Lets create a widget that shows informatain about failing builds. It'll be close
 * Get same data from a URL, possbily having to authenticate.
 * Parse that data (if it is HTML we can [use Mechianize](http://mechanize.rubyforge.org)).
 * Loop though the data to find the interesting information.
-* Filter that information, e.g. based on status
+* Filter that information, e.g. based on status.
 * Post that information to one of more widgets.
 
     SCHEDULER.every '15m', :first_in => 0 do |job|
@@ -55,11 +55,11 @@ Lets create a widget that shows informatain about failing builds. It'll be close
             {:repo => repo, :status => status}
         }
         failing_builds=builds.find_all{|build| build[:status]!='ok'}
-        send_event('travis_builds', {
-                :items => builds.map{|build| {:label => "#{build[:repo]} #{build[:status]}"}},
-                :moreinfo => "#{failing_builds.length}/#{builds.length} failing",
-                :status => (failing_builds.length>0?'warning':'ok')
-            })
+            send_event('travis_builds', {
+            :items => builds.map{|build| {:label => "#{build[:repo]} #{build[:status]}"}},
+            :moreinfo => "#{failing_builds.length}/#{builds.length} failing",
+            :status => (failing_builds.length>0?'warning':'ok')
+        })
     end
 
 To create the widget I've copied the widgets/list to widgets/travis_builds and added this to the code to change the colour of the widget based on status:
