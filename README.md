@@ -49,6 +49,7 @@ Lets create a widget that shows informatain about failing builds. It'll be close
 * Filter that information, e.g. based on status.
 * Post that information to one of more widgets.
 
+
     SCHEDULER.every '15m', :first_in => 0 do |job|
         builds=config[:builds].map{|repo|
             status=JSON(get("https://api.travis-ci.org/repositories/#{config[:user]}//#{repo}/builds.json"))[0]['result']?'ok':'failing'
@@ -76,7 +77,7 @@ Installing as a On a PC
 ---
 You'll want to run this on a Linux computer with a monitor mounted in a suitable place.
 
-I've [written a script to start this as service on Linux](https://raw.github.com/alexec/dashing-example/master/dashboard.sh]. You'll need to add a cd to change to the correct directory.
+I've [written a script to start this as service on Linux](https://raw.github.com/alexec/dashing-example/master/dashboard.sh). You'll need to add a cd to change to the correct directory.
 
 If you want to be eco-friendly you can turn the screen on and off at suitable times using xset, put this in your crontab:
 
