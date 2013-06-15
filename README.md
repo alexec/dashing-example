@@ -11,12 +11,15 @@ I thought I'd put a few hints and tips after what I've learnt.
 Why do you want a team dashboard? A dashboard can provide an overview of the team's status, and highlight actions that need to be taken. The ones we've got include:
 
 Actionable tiles:
+
 * Build status. Which builds (of the 41 builds) that are broken, and who the CI thinks broken them. This goes red if builds are broken and indicates who needs to fix the build.
 * Failing tests. Again, which tests are failing and who the CI thinks broke them. Since the test's package can indicate which feature needs fixing, this also indicates who might want to take a look.
 * Recorded time. Who has not recorded their time in the timesheet system.</span></li>
 * New tickets. Untriaged tickets in the bug tracking system, that need to be triaged.
 * Overdue code reviews.
+
 Information tiles:
+
 * Recent commits. This shows what we're working on.
 * Beer clock: On Fridays, how many hours to free beer.
 * Assigned tickets. Tickets we're working on.
